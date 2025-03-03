@@ -1,0 +1,59 @@
+{
+  "name": "Get Users Division From Email",
+  "integrationType": "purecloud-data-actions",
+  "actionType": "custom",
+  "config": {
+    "request": {
+      "requestUrlTemplate": "/api/v2/users/search",
+      "requestType": "POST",
+      "headers": {
+        "Content-Type": "application/json"
+      },
+      "requestTemplate": "{\r\n  \"query\": [\r\n     {\r\n        \"value\": \"${input.email}\",\r\n        \"fields\": [\"workemail\",\"email\"],\r\n        \"type\": \"QUERY_STRING\"\r\n     }\r\n  ]\r\n}\r\n}"
+    },
+    "response": {
+      "translationMap": {
+        "division": "$.results[0].division.name"
+      },
+      "translationMapDefaults": {
+        "division": "\"Error\""
+      },
+      "successTemplate": "{\"results.division.name\":${division}}"
+    }
+  },
+  "contract": {
+    "input": {
+      "inputSchema": {
+        "$schema": "http://json-schema.org/draft-04/schema#",
+        "title": "UserIdRequest",
+        "description": "GET user division via email",
+        "type": "object",
+        "required": [
+          "email"
+        ],
+        "properties": {
+          "email": {
+            "description": "The email address from a user.",
+            "type": "string"
+          }
+        },
+        "additionalProperties": true
+      }
+    },
+    "output": {
+      "successSchema": {
+        "$schema": "http://json-schema.org/draft-04/schema#",
+        "title": "Get users division based on an email address given",
+        "description": "Returns the users division.",
+        "type": "object",
+        "properties": {
+          "results.division.name": {
+            "type": "string"
+          }
+        },
+        "additionalProperties": true
+      }
+    }
+  },
+  "secure": false
+}
