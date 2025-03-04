@@ -34,17 +34,39 @@ We can configure per user based on their division or if they have a primary numb
 
 ## Step 1: Create a Data Action
 
+* Go to Admin > Actions (Under Integrations)
 * Create a Genesys Cloud Data Action: This action will retrieve the user's division based on their email. Ensure you have an active Genesys Cloud data actions integration with the appropriate permissions.
-* Import the [data action](../Get-Users-Division-From-Email.json)
+
+   ![create a data action](images/Import%20Data%20Action.png "create a data action")
+
+* Download and Import the [data action](../Get-Users-Division-From-Email.json)
+
+   ![import action details](images/Import%20Action%20Details.png "import action details")
+
 * Save and Publish the data action
 
+   ![save and publish data action](images/Save%20and%20Publish%20Data%20Action.png "save and publish data action")
+
+
 ## Step 2: Inbound Call Flow
-* In this case I have named my inbound call flow SetVoicemailLanguage.
-* You can import the [Inbound Call Flow](../SetVoicemailLanguage_v1-0.i3InboundFlow).
 
-   ![create a data table](images/datatable.gif "create a data table")
+* Go to Admin > Architect (Under Architect)
+* In the Inbound Call Flow, click "Add"
 
-* Create your own Inbound Call Flow by following the steps below.
+* OPTION 1: In this case I have named my inbound call flow "SetVoicemailLanguage".
+
+   ![create inbound flow](images/Create%20Inbound%20Flow.png "create inbound flow")
+
+* Click on the down arrow next to "Save" and click "Import"
+   
+   ![import inbound call flow](images/Import%20Inbound%20Call%20Flow.png "import inbound call flow")
+
+* You can download and import the [Inbound Call Flow](../SetVoicemailLanguage_v1-0.i3InboundFlow).
+
+   ![import a flow](images/Import%20a%20Flow.png "import a flow")
+
+
+* OPTION 2: Create your own Inbound Call Flow by following the steps below.
 * In your inbound call flow create a reusable task and give it a name.
 * Add an Update Data Block, you will need to add 3 string statements.
 
@@ -88,7 +110,7 @@ We can configure per user based on their division or if they have a primary numb
 * Picture 6
 
 * Still under the Yes path, add a **Call Data Action**.
-* Select the **category** that the “Get Users Division From Email” is under in this case it is Genesys Cloud Data Actions. 
+* Select the **category** that the “Get Users Division From Email” is under. In this case it is **Genesys Cloud Data Actions**. 
 * Data Action - **“Get Users Division From Email"**.
 
 | Inputs for the Data Action | Value to Assign |
@@ -143,6 +165,7 @@ We can configure per user based on their division or if they have a primary numb
 
 ## Step 3: Configuring the site
 
+* 
 * Here you will configure your site to push all users that dial *86 into your inbound call flow that you created.
 
 1. In your **Site**, click on **Number Plans**.
